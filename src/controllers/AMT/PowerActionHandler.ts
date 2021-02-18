@@ -167,9 +167,13 @@ export class PowerActionHandler implements IAmtHandler {
         }
         if (bootSource != null) {
           bootSource =
-            '<Address xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing">http://schemas.xmlsoap.org/ws/2004/08/addressing</Address><ReferenceParameters xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing"><ResourceURI xmlns="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd">http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_BootSourceSetting</ResourceURI><SelectorSet xmlns="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd"><Selector Name="InstanceID">Intel(r) AMT: ' +
-            bootSource +
-            '</Selector></SelectorSet></ReferenceParameters>'
+            `<Address xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing">http://schemas.xmlsoap.org/ws/2004/08/addressing</Address>
+            <ReferenceParameters xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+              <ResourceURI xmlns="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd">http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_BootSourceSetting</ResourceURI>
+              <SelectorSet xmlns="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd">
+                <Selector Name="InstanceID">Intel(r) AMT: ${bootSource}</Selector>
+              </SelectorSet>
+            </ReferenceParameters>`
         }
         this.changeBootOrder(uuid, action, amtstack, bootSource, res)
       },
