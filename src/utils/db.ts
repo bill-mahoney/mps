@@ -118,6 +118,7 @@ export class dataBase implements IDbProvider {
   IsGUIDApproved (guid, cb): void {
     try {
       let result = false
+
       if (this.config?.use_allowlist) {
         const guids = this.getAllGUIDS()
         if (guids.includes(guid)) {
