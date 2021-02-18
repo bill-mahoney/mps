@@ -11,10 +11,11 @@ import { logger as log } from '../../utils/logger'
 import { ErrorResponse } from '../../utils/amtHelper'
 import { IAdminHandler } from '../../models/IAdminHandler'
 import { MPSMicroservice } from '../../mpsMicroservice'
-
-const common = require('../../utils/common.js')
+import { CreateAmtScriptEngine } from '../../utils/amtscript.js'
+const scriptEngine = CreateAmtScriptEngine()
+import * as common from '../../utils/common.js'
 // ToDo: Need to fix import fs issue
-const fs = require('fs')
+import fs from 'fs'
 
 export class MEScriptHandler implements IAdminHandler {
   mps: MPSMicroservice
@@ -39,7 +40,7 @@ export class MEScriptHandler implements IAdminHandler {
               .send(ErrorResponse(500, 'Request failed while downloading MEScript.'))
             return
           }
-          const scriptFile = JSON.parse(data)
+          const scriptFile = JSON.parse(Buffer.from(data).toString())
 
           // Change a few things in the script
           scriptFile.scriptBlocks[2].vars.CertBin.value = (process.env.ROOT_CA_CERT
@@ -55,7 +56,6 @@ export class MEScriptHandler implements IAdminHandler {
           scriptFile.scriptBlocks[6].vars.DetectionStrings.value = 'dummy.com' // Set the environment detection local FQDN's
 
           // Compile the script
-          const scriptEngine = require('../../utils/amtscript.js').CreateAmtScriptEngine()
           const runscript = scriptEngine.script_blocksToScript(
             scriptFile.blocks,
             scriptFile.scriptBlocks
