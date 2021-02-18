@@ -12,10 +12,10 @@ import { ErrorResponse } from '../../utils/amtHelper'
 import { IAdminHandler } from '../../models/IAdminHandler'
 import { MPSMicroservice } from '../../mpsMicroservice'
 import { CreateAmtScriptEngine } from '../../utils/amtscript.js'
-const scriptEngine = CreateAmtScriptEngine()
 import * as common from '../../utils/common.js'
 // ToDo: Need to fix import fs issue
 import fs from 'fs'
+const scriptEngine = CreateAmtScriptEngine()
 
 export class MEScriptHandler implements IAdminHandler {
   mps: MPSMicroservice

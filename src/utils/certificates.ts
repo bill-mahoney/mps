@@ -24,10 +24,10 @@ export class certificates {
     let rootCertificate, rootPrivateKey
     let rootCertAndKey: certAndKeyType
     let mpsCertificate, mpsPrivateKey
-    let rootCertPath = path.join(certpath,'/root-cert-public.crt')
-    let rootCertPrivateKeyPath = path.join(certpath,'/root-cert-private.key')
-    let mpsserverCertPath = path.join(certpath,'/mpsserver-cert-public.crt')
-    let mpsserverCertPrivateKeyPath = path.join(certpath,'/mpsserver-cert-private.key')
+    const rootCertPath = path.join(certpath, '/root-cert-public.crt')
+    const rootCertPrivateKeyPath = path.join(certpath, '/root-cert-private.key')
+    const mpsserverCertPath = path.join(certpath, '/mpsserver-cert-public.crt')
+    const mpsserverCertPrivateKeyPath = path.join(certpath, '/mpsserver-cert-private.key')
     if (fs.existsSync(rootCertPath) && fs.existsSync(rootCertPrivateKeyPath)) {
       // load certificate
       rootCertificate = fs.readFileSync(rootCertPath, 'utf8')

@@ -364,7 +364,7 @@ export class webServer {
         const method = req.body.method
         const payload = req.body.payload || {}
         if (method) {
-          if (payload && payload.guid !== undefined) {
+          if (payload?.guid !== undefined) {
             if (!UUIDRegex.test(payload.guid)) {
               return res.status(404).send(ErrorResponse(404, null, 'invalidGuid'))
             }
